@@ -6,6 +6,7 @@ use App\Models\Chat;
 use App\Models\Message;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -35,14 +36,23 @@ class DatabaseSeeder extends Seeder
         $chat->users()->attach($mike->id, ['is_admin' => false]);
 
         //create many messages between mike and paul
-        Message::factory(10)->create([
+        Message::factory(20)->state(
+            new Sequence(
+                ['user_id' => $mike->id],
+                ['user_id' => $paul->id],
+            )
+        )->create([
             'chat_id' => $chat->id,
-            'user_id' => $mike->id,
         ]);
 
-        Message::factory(10)->create([
-            'chat_id' => $chat->id,
-            'user_id' => $paul->id,
-        ]);
+//        Message::factory(10)->create([
+//            'chat_id' => $chat->id,
+//            'user_id' => $mike->id,
+//        ]);
+//
+//        Message::factory(10)->create([
+//            'chat_id' => $chat->id,
+//            'user_id' => $paul->id,
+//        ]);
     }
 }

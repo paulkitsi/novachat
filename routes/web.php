@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\chatController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +14,17 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/chats', [ChatController::class, 'index'])->name('chats.index');
+    Route::post('/chats', [ChatController::class, 'store'])->name('chats.store');
+    Route::get('/chats/{chat}', [ChatController::class, 'show'])->name('chats.show');
+    Route::patch('/chats/{chat}', [ChatController::class, 'update'])->name('chats.update');
+    Route::delete('/chats/{chat}', [ChatController::class, 'destroy'])->name('chats.destroy');
+
+    Route::post('/chats/{chat}/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::delete('/chats/{chat}/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
 });
 
 Route::get('/dashboard', function () {

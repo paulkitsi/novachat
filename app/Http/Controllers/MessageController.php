@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chat;
 use App\Models\Message;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -17,15 +18,17 @@ class MessageController extends Controller
         return Message::all();
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Chat $chat)
     {
         $this->authorize('create', Message::class);
 
         $data = $request->validate([
-
+            'content' => ['required', 'string'],
         ]);
 
-        return Message::create($data);
+        $chat->messages()->create([...$data, 'user_id' => auth()->id()]);
+
+        return back();
     }
 
     public function show(Message $message)

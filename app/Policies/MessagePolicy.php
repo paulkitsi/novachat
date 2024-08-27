@@ -10,32 +10,38 @@ class MessagePolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-
+        return true;
     }
 
-    public function view(User $user, Message $message)
+    public function view(User $user, Message $message): bool
     {
+        return true;
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
+        return true;
     }
 
-    public function update(User $user, Message $message)
+    public function update(User $user, Message $message): bool
     {
+        return true;
     }
 
-    public function delete(User $user, Message $message)
+    public function delete(User $user, Message $message): bool
     {
+        return true;
     }
 
-    public function restore(User $user, Message $message)
+    public function restore(User $user, Message $message): bool
     {
+        return true;
     }
 
-    public function forceDelete(User $user, Message $message)
+    public function forceDelete(User $user, Message $message): bool
     {
+        return true;
     }
 }
