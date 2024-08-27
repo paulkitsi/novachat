@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\chat;
+use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
 class chatFactory extends Factory
 {
-    protected $model = chat::class;
+    protected $model = Chat::class;
 
     public function definition()
     {

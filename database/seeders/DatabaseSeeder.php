@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\chat;
+use App\Models\Chat;
 use App\Models\Message;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -30,6 +30,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Laravel Chat',
             'user_id' => $paul->id,
         ]);
+
+        $chat->users()->attach($paul->id, ['is_admin' => true]);
+        $chat->users()->attach($mike->id, ['is_admin' => false]);
 
         //create many messages between mike and paul
         Message::factory(10)->create([

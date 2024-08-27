@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\chat;
+use App\Models\Chat;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
@@ -12,30 +12,30 @@ class chatController extends Controller
 
     public function index()
     {
-        $this->authorize('viewAny', chat::class);
+        $this->authorize('viewAny', Chat::class);
 
-        return chat::all();
+        return Chat::all();
     }
 
     public function store(Request $request)
     {
-        $this->authorize('create', chat::class);
+        $this->authorize('create', Chat::class);
 
         $data = $request->validate([
 
         ]);
 
-        return chat::create($data);
+        return Chat::create($data);
     }
 
-    public function show(chat $chat)
+    public function show(Chat $chat)
     {
         $this->authorize('view', $chat);
 
         return $chat;
     }
 
-    public function update(Request $request, chat $chat)
+    public function update(Request $request, Chat $chat)
     {
         $this->authorize('update', $chat);
 
@@ -48,7 +48,7 @@ class chatController extends Controller
         return $chat;
     }
 
-    public function destroy(chat $chat)
+    public function destroy(Chat $chat)
     {
         $this->authorize('delete', $chat);
 
